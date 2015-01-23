@@ -9,7 +9,7 @@ namespace ConsoleApplication1
 	/// <summary>
 	/// Définit un étudiant
 	/// </summary>
-	private class Étudiant
+	public class Étudiant
 	{
 		#region Champs
 
@@ -55,10 +55,28 @@ namespace ConsoleApplication1
 
 		#endregion
 
-		#region Accesseurs
+		#region Propriétés
 
-
-
+		public string Prénom
+		{
+			get { return _prénom; }
+			set { _prénom = value; }
+		}
+		public string Nom
+		{
+			get { return _nom; }
+			set { _nom = value; }
+		}
+		public string DA
+		{
+			get { return _DA; }
+			set { _DA = value; }
+		}
+		public byte Âge
+		{
+			get { return _âge; }
+			set { _âge = value; }
+		}
 		#endregion
 	}
 }
