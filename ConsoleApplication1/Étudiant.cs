@@ -19,7 +19,7 @@ namespace ConsoleApplication1
 		private byte _âge;
 		private float _moyenneGénérale;
 		private byte _nbrAbsences;
-		private List<string> listeCours;
+		private List<string> _listeCours;
 
 		#endregion
 
@@ -27,10 +27,37 @@ namespace ConsoleApplication1
 		/// <summary>
 		/// Constructeur par défaut
 		/// </summary>
-		Étudiant()
+		public Étudiant()
 		{
+			_prénom = _nom = _DA = "";
+			_âge = _nbrAbsences = 0;
+			_moyenneGénérale = 0.0f;
 
+			_listeCours = new List<string>();
 		}
+		/// <summary>
+		/// COnstructeur à données connus
+		/// </summary>
+		/// <param name="prénom"></param>
+		/// <param name="nom"></param>
+		/// <param name="DA"></param>
+		/// <param name="âge"></param>
+		/// <param name="moyenneGénérale"></param>
+		/// <param name="nbrAbsences"></param>
+		/// <param name="listeCours"></param>
+		public Étudiant(string prénom, string nom, string DA, byte âge, float moyenneGénérale, byte nbrAbsences, List<string> listeCours)
+		{
+			_prénom = prénom; _nom = nom; _DA = DA;
+			_âge = âge; _nbrAbsences = nbrAbsences;
+			_moyenneGénérale = moyenneGénérale;
+			_listeCours = listeCours;
+		}
+
+		#endregion
+
+		#region Accesseurs
+
+
 
 		#endregion
 	}
