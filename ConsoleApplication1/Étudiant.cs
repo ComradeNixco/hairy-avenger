@@ -77,6 +77,49 @@ namespace ConsoleApplication1
 			get { return _âge; }
 			set { _âge = value; }
 		}
+		public float MoyenneÂge
+		{
+			get { return _moyenneGénérale; }
+			set { _moyenneGénérale = value; }
+		}
+		public byte NbrAbsences
+		{
+			get { return _nbrAbsences; }
+			set { _moyenneGénérale = value; }
+		}
+		public int NbrCours
+		{
+			get { return _listeCours.Count; }
+		}
+		public List<string> ListeCours
+		{
+			get { return _listeCours; }
+			set { _listeCours = value; }
+		}
+
+		#endregion
+
+		#region Méthodes
+		
+		/// <summary>
+		/// Obtient la ligne CSV contenant les données de la classe
+		/// </summary>
+		/// <param name="séparateur">Le séparateur à utilisé</param>
+		/// <returns>La ligne CSV à enregistrer</returns>
+		public string ObtenirCSV(char séparateur = '|')
+		{
+			string ligneCSV = "";
+
+			ligneCSV += _prénom + séparateur + _nom + séparateur + _DA + séparateur + _âge + séparateur + _moyenneGénérale + séparateur + _nbrAbsences + séparateur + NbrCours;
+			foreach (string cour in _listeCours)
+			{
+				ligneCSV += séparateur + cour;
+			}
+
+			return ligneCSV;
+		}
+		public void 
+
 		#endregion
 	}
 }
