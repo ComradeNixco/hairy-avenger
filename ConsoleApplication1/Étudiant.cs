@@ -106,7 +106,7 @@ namespace ConsoleApplication1
 		/// </summary>
 		/// <param name="séparateur">Le séparateur à utilisé</param>
 		/// <returns>La ligne CSV à enregistrer</returns>
-		public string ObtenirCSV(char séparateur = '|')
+		public string EnregistrerCSV(char séparateur = '|')
 		{
 			string ligneCSV = "";
 
@@ -118,7 +118,15 @@ namespace ConsoleApplication1
 
 			return ligneCSV;
 		}
-		public void 
+		/// <summary>
+		/// Remplit l'objet avec les données de la ligne CSV
+		/// </summary>
+		/// <param name="ligneCSV">Ligne contenant les données</param>
+		/// <param name="séparateur">Le séparateur utilisé pour sépararer chacune des données</param>
+		public void ChargerCSV(string ligneCSV, char séparateur = '|')
+		{
+			string[] éléments = ligneCSV.Split(séparateur);
+		}
 
 		#endregion
 	}
