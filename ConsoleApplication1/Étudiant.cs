@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace TP1CSV
 {
 	/// <summary>
 	/// Définit un étudiant
@@ -138,7 +138,27 @@ namespace ConsoleApplication1
 			for(int i = 6; i < éléments.Length; i++)
 				_listeCours.Add(éléments[i]);
 		}
+		/// <summary>
+		/// Permet d'obtenir la version string de l'objet, affiche tout sons contenue sans retour de lignes
+		/// </summary>
+		/// <returns>la valeur dce type string représentant l'objet</returns>
+		public string ToString()
+		{
+			string valeur = "";
+			valeur += "Prénom et nom: " + Prénom + ' ' + Nom + "; DA: " + DA + "; âge: " + Âge;
+			valeur += " moyenne générale: " + MoyenneGénérale + "; Nombre d'absence(s):	" + NbrAbsences;
+			valeur += "; Liste de cour(s): ";
 
+			for (int i = 0; i < _listeCours.Count; i++)
+			{
+				if (i != 0)
+					valeur += ", ";
+
+				valeur += _listeCours[i];
+			}
+
+			return valeur;
+		}
 		#endregion
 	}
 }
