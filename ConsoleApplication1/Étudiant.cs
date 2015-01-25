@@ -77,7 +77,7 @@ namespace ConsoleApplication1
 			get { return _âge; }
 			set { _âge = value; }
 		}
-		public float MoyenneÂge
+		public float MoyenneGénérale
 		{
 			get { return _moyenneGénérale; }
 			set { _moyenneGénérale = value; }
@@ -110,7 +110,7 @@ namespace ConsoleApplication1
 		{
 			string ligneCSV = "";
 
-			ligneCSV += _prénom + séparateur + _nom + séparateur + _DA + séparateur + _âge + séparateur + _moyenneGénérale + séparateur + _nbrAbsences + séparateur + NbrCours;
+			ligneCSV += _prénom + séparateur + _nom + séparateur + _DA + séparateur + _âge + séparateur + _moyenneGénérale + séparateur + _nbrAbsences;
 			foreach (string cour in _listeCours)
 			{
 				ligneCSV += séparateur + cour;
@@ -126,6 +126,17 @@ namespace ConsoleApplication1
 		public void ChargerCSV(string ligneCSV, char séparateur = '|')
 		{
 			string[] éléments = ligneCSV.Split(séparateur);
+
+			_prénom = éléments[0];
+			_nom = éléments[1];
+			_DA = éléments[2];
+			_âge = Convert.ToByte(éléments[3]);
+			_moyenneGénérale = float.Parse(éléments[4]);
+			_nbrAbsences = Convert.ToByte(éléments[5]);
+			_listeCours = new List<string>();
+
+			for(int i = 6; i < éléments.Length; i++)
+				_listeCours.Add(éléments[i]);
 		}
 
 		#endregion
