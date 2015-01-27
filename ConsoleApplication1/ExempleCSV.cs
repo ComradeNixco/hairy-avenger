@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace TP1CSV
@@ -14,7 +11,6 @@ namespace TP1CSV
         public void PointDEntrée(string[] args)
         {
 			// declaration/initialisation
-			bool ajoutsTerminé = false;
 			const string nomDeFichier = "ListeDÉtudiants.csv";
 			List<string> lignesCSV = new List<string>();
 			List<Étudiant> listeÉtudiants = new List<Étudiant>();
@@ -41,7 +37,7 @@ namespace TP1CSV
 
 					temporaire.ChargerCSV(ligne, SÉPARATEUR_PAR_DÉFAUT);
 					listeÉtudiants.Add(temporaire);
-					Console.WriteLine(temporaire);	// Appelle temporaire.ToString() hérité de Object.ToString()
+					Console.WriteLine(temporaire.ToString());	// Appelle temporaire.ToString() hérité de Object.ToString()
 				}
 			}
 
@@ -49,10 +45,10 @@ namespace TP1CSV
 			Console.WriteLine("Voulez-vous rajouter un ou des élève(s)? (o/n)");
 			if(Console.ReadLine().ToUpper()[0] == 'O')	// Oui
 			{
+				bool ajoutsTerminé = false;
 				while(!ajoutsTerminé)
 				{
 					Étudiant temporaire = new Étudiant();
-					string ligne = "";
 
 					Console.Write("Prénom: ");
 					temporaire.Prénom = Console.ReadLine();
@@ -63,7 +59,15 @@ namespace TP1CSV
 					Console.Write("Âge: ");
 					temporaire.Âge = byte.Parse(Console.ReadLine());
 					Console.Write("Moyenne générale: ");
-					temporaire.MoyenneGénérale = float.Parse(Console.ReadLine());
+					try
+					{
+						temporaire.MoyenneGénérale = float.Parse(Console.ReadLine());
+					}
+					catch (FormatException)
+					{
+						Console.WriteLine("Mauvais format, veuillez, s'il-vous-plait utiliser la virgule ',' et nom le point '.'\nVeuillez recommencez\nMoyenne générale");
+						temporaire.MoyenneGénérale = float.Parse(Console.ReadLine());
+					}
 					Console.Write("Nombre d'Absence(s): ");
 					temporaire.NbrAbsences = byte.Parse(Console.ReadLine());
 
@@ -75,12 +79,27 @@ namespace TP1CSV
 						Console.Write("Nom du cours à ajouter (vide si aucun autre cours): ");
 					}
 
+					listeÉtudiants.Add(temporaire);
 					Console.WriteLine("Ajout de l'Étudiant " + temporaire.Prénom + ' ' + temporaire.Nom + " (" + temporaire.DA + ") terminé!");
 					Console.WriteLine("Voulez-vous ajouter un autre élève? (o/n)");
 					if (Console.ReadLine().ToUpper()[0] != 'O')	// Non
 						ajoutsTerminé = true;
 				}
 			}
+
+			Console.WriteLine("Sauvegarde des données des Étudiants...");
+
+			// Écriture des données dans le fichier CSV
+			fichierÉcriture = new StreamWriter(nomDeFichier, false);	// Ouvre le fichier, mais efface son contenu, on repart a neuf
+
+			foreach(Étudiant enCours in listeÉtudiants)
+				fichierÉcriture.WriteLine(enCours.EnregistrerCSV('|'));
+
+			fichierÉcriture.Flush();
+			fichierÉcriture.Close();
+
+			Console.WriteLine("Sauvegarde terminée!\nL'application va maintenant quitter");
+			Console.ReadKey(false);
         }
     }
 }

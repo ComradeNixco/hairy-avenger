@@ -85,7 +85,7 @@ namespace TP1CSV
 		public byte NbrAbsences
 		{
 			get { return _nbrAbsences; }
-			set { _moyenneGénérale = value; }
+			set { _nbrAbsences = value; }
 		}
 		public int NbrCours
 		{
@@ -142,7 +142,7 @@ namespace TP1CSV
 		/// Permet d'obtenir la version string de l'objet, affiche tout sons contenue sans retour de lignes
 		/// </summary>
 		/// <returns>la valeur dce type string représentant l'objet</returns>
-		public string ToString()
+		public override string ToString()
 		{
 			string valeur = "";
 			valeur += "Prénom et nom: " + Prénom + ' ' + Nom + "; DA: " + DA + "; âge: " + Âge;
