@@ -4,18 +4,31 @@ using System.IO;
 
 namespace TP1CSV
 {
-    class ExempleCSV
-    {
-        private static char SÉPARATEUR_PAR_DÉFAUT = '|';
+	class ExempleCSV
+	{
+		private static char SÉPARATEUR_PAR_DÉFAUT = '|';
 
-        public void PointDEntrée(string[] args)
-        {
+		public void PointDEntrée(string[] args)
+		{
 			// declaration/initialisation
 			const string nomDeFichier = "ListeDÉtudiants.csv";
 			List<string> lignesCSV = new List<string>();
 			List<Étudiant> listeÉtudiants = new List<Étudiant>();
-			StreamReader fichierLecture = new StreamReader(nomDeFichier);
+			StreamReader fichierLecture; 
 			StreamWriter fichierÉcriture;
+
+			try
+			{
+				fichierLecture = new StreamReader(nomDeFichier);
+			}
+			catch (FileNotFoundException)
+			{
+				fichierÉcriture = new StreamWriter(nomDeFichier, false);
+				fichierÉcriture.Flush();
+				fichierÉcriture.Close();
+				fichierLecture = new StreamReader(nomDeFichier);
+			}
+			
 
 			// Lecture du fichier
 			while(!fichierLecture.EndOfStream)
@@ -100,6 +113,6 @@ namespace TP1CSV
 
 			Console.WriteLine("Sauvegarde terminée!\nL'application va maintenant quitter");
 			Console.ReadKey(false);
-        }
-    }
+		}
+	}
 }
