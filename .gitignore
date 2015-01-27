@@ -29,3 +29,6 @@
 
 #others
 *.exe.*
+*.csproj.*
+*/Debug/*
+*/bin/*
